@@ -3,7 +3,7 @@ from flask import jsonify, Blueprint;
 
 # middlewares & controllers
 from middlewares.representative.representative_delete_middleware import representative_delete_middleware;
-from controllers.representative_delete_controller import delete_representative_controller;
+from controllers.representative.representative_delete_controller import delete_representative_controller;
 
 # Criando um blueprint para a rota.
 delete_representative_blueprint = Blueprint("representative_routes", __name__); 

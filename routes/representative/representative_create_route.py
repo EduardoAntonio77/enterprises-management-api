@@ -4,7 +4,7 @@ from models.representative_model import Representative;
 
 # importando middleware e controller
 from middlewares.representative.representative_create_middleware import validate_representant_data;
-from controllers.representative_create_controller import register_representative_controller;
+from controllers.representative.representative_create_controller import register_representative_controller;
 
 # criando blueprint
 create_representant_blueprint = Blueprint('create_representant_blueprint', __name__)
