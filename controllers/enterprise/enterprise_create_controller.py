@@ -5,7 +5,7 @@ from models.enterprise_model import Enterprise
 def create_enterprise(data):
     new_enterprise = Enterprise(
         name=data['name'],
-        client_quantity=data["lient_quantity"],
+        client_quantity=data["client_quantity"],
         address=data['address'],
         phone=data['phone'],
         representative_id=["representative_id"]
