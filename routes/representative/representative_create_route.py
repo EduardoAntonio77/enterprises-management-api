@@ -1,6 +1,5 @@
 # imports
 from flask import Blueprint, request, jsonify;
-from models.representative_model import Representative;
 
 # importando middleware e controller
 from middlewares.representative.representative_create_middleware import validate_representant_data;
