@@ -3,6 +3,7 @@ def register_routes(app):
     from .representative.representative_create_route import create_representant_blueprint;
     from .representative.representative_delete_route import delete_representative_blueprint
     from .enterprise.enterprise_create_route import create_enterprise_blueprint
+    from .enterprise.enterprise_edit_route import enterprise_edit_blueprint
 
     # slash
     app.register_blueprint(slash_blueprint);
@@ -13,6 +14,7 @@ def register_routes(app):
 
     # enterprise
     app.register_blueprint(create_enterprise_blueprint)
+    app.register_blueprint(enterprise_edit_blueprint)
 
     # client
 
