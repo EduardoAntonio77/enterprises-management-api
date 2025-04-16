@@ -1,6 +1,5 @@
-from flask import Flask, jsonify, Blueprint, request
+from flask import jsonify, Blueprint
 from middlewares.representative.representative_edit_middleware import representative_middleware
-from controllers.representative.representative_edit_controller import edit_representative_controller # Imports
 
 edit_representative_blueprint = Blueprint('edit_representative_route', __name__) # Criando um blueprint para a rota.
 
