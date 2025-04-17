@@ -8,7 +8,7 @@ def create_enterprise(data):
         client_quantity=data["client_quantity"],
         address=data['address'],
         phone=data['phone'],
-        representative_id=data['representative_id']
+        enterprise_id=data['enterprise_id']
     )
 
     database.session.add(new_enterprise)
