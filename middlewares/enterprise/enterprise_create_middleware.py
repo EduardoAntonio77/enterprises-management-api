@@ -8,12 +8,12 @@ def enterprise_create(data):
             return f"Missing field: {field}"
 
 
-    duplicate_name = Enterprise.query.filter_by(name=data['name']).first()
-    if duplicate_name:
+    duplicated_name = Enterprise.query.filter_by(name=data['name']).first()
+    if duplicated_name:
         return f"An enterprise wiht this name already exists."
 
-    duplicate_phone = Enterprise.query.filter_by(phone=data['phone']).first()
-    if duplicate_phone:
+    duplicated_phone = Enterprise.query.filter_by(phone=data['phone']).first()
+    if duplicated_phone:
         return "An enterprise with this phone number already exists."
     
     representative = Representative.query.get(data["representative_id"])
