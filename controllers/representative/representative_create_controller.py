@@ -8,6 +8,7 @@ def register_representative_controller(data):
        cnpj=data['cnpj'],
        email=data['email'],
        phone=data['phone'],
+       password=data['password']
     );
     database.session.add(newrepresentative);
     database.session.commit();
