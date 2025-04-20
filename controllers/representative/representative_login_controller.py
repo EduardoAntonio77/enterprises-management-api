@@ -1,4 +1,3 @@
-from models.representative_model import Representative
 from flask import g
 from config.jwt_utils.tokens import generate_access_token
 
