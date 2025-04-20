@@ -3,11 +3,14 @@ from flask import Flask;
 from flask_cors import CORS;
 from flask_migrate import Migrate;
 from database import database;
-
+from config.jwt_utils.manager import init_jwt
+from flask_jwt_extended import JWTManager
 from routes import register_routes;
 
 # essential config
 app = Flask(__name__);
+init_jwt(app)
+jwt = JWTManager(app)
 
 CORS(app, origins='http://localhost:3000');
 

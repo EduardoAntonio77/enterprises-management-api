@@ -6,6 +6,9 @@ def register_routes(app):
     from .representative.representative_create_route import create_representant_blueprint;
     from .representative.representative_delete_route import delete_representative_blueprint;
     from .representative.representative_edit_route import edit_representative_blueprint;
+    from .representative.representative_get_route import representative_get_blueprint
+    from routes.representative.representative_get_filter_route import representative_get_filter_blueprint
+    from routes.representative.representative_login_route import login_route
     
     # Enterprise_route
     from .enterprise.enterprise_create_route import create_enterprise_blueprint;
@@ -30,6 +33,9 @@ def register_routes(app):
     app.register_blueprint(create_representant_blueprint);
     app.register_blueprint(delete_representative_blueprint);
     app.register_blueprint(edit_representative_blueprint);
+    app.register_blueprint(representative_get_blueprint);
+    app.register_blueprint(representative_get_filter_blueprint)
+    app.register_blueprint(login_route)
     
 
     # enterprise

@@ -1,10 +1,12 @@
 from flask import Blueprint, request, jsonify
 from controllers.client.client_edit_controller import client_edit_controller
 from middlewares.client.client_edit_middleware import client_edit_middleware
+from flask_jwt_extended import jwt_required
 
 client_edit_blueprint = Blueprint('client_edit_blueprint', __name__)
 
 @client_edit_blueprint.route('/client/<int:id>', methods=['PUT'])
+@jwt_required()
 def client_edit(id):
     client = client_edit_middleware(id)
     if not client:

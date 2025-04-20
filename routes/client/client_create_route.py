@@ -2,9 +2,11 @@ from flask import Blueprint, request, jsonify
 
 from middlewares.client.client_create_middleware import client_create
 from controllers.client.client_create_controller import client_create_controller
+from flask_jwt_extended import jwt_required
 
 client_create_blueprint = Blueprint('create_client_blueprint', __name__)
 @client_create_blueprint.route("/client", methods=['POST'])
+@jwt_required()
 def register_client():
     data = request.json;
 

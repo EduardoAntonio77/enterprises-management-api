@@ -1,10 +1,12 @@
 from flask import Blueprint, request, jsonify
 from middlewares.product.product_edit_middleware import product_edit
 from controllers.product.product_edit_controller import product_edit_controller
+from flask_jwt_extended import jwt_required
 
 product_edit_blueprint = Blueprint('product_edit_blueprint', __name__)
 
 @product_edit_blueprint.route("/product/<int:id>", methods=['PUT'])
+@jwt_required()
 def edit_product(id):
     data = request.json
 

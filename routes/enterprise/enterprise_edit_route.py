@@ -1,4 +1,5 @@
 from flask import request, jsonify, Blueprint
+from flask_jwt_extended import jwt_required
 
 from middlewares.enterprise.enterprise_edit_middleware import enterprise_edit_middleware
 from controllers.enterprise.enterprise_edit_controller import enterprise_edit_controller
@@ -6,7 +7,7 @@ from controllers.enterprise.enterprise_edit_controller import enterprise_edit_co
 enterprise_edit_blueprint = Blueprint('enterprise_edit_route', __name__)
 
 @enterprise_edit_blueprint.route("/enterprise/<int:id>", methods=['PUT'])
-
+@jwt_required()
 def edit_enterprise(id):
     enterprise = enterprise_edit_middleware(id)
     if not enterprise:

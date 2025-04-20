@@ -1,5 +1,6 @@
 # imports
 from flask import Blueprint, request, jsonify;
+from flask_jwt_extended import jwt_required
 
 # Importando middlewares e controllers
 from middlewares.enterprise.enterprise_create_middleware import enterprise_create;
@@ -8,6 +9,7 @@ from controllers.enterprise.enterprise_create_controller import create_enterpris
 # Criando um blueprint para registrar a rota em app.py
 create_enterprise_blueprint = Blueprint('create_enterprise_blueprint', __name__)
 @create_enterprise_blueprint.route('/enterprise', methods=['POST'])
+@jwt_required()
 def register_enterprise():
     # Criando uma variavel que ira receber os dados que o usuario passou na rota usando o metodo POST.
     data = request.json;

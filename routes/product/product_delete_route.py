@@ -1,4 +1,5 @@
 from flask import Blueprint, jsonify
+from flask_jwt_extended import jwt_required
 
 from middlewares.product.product_delete_middleware import product_delete
 from controllers.product.product_delete_controller import product_delete_controller
@@ -6,6 +7,7 @@ from controllers.product.product_delete_controller import product_delete_control
 product_delete_blueprint = Blueprint('delete_product_blueprint', __name__)
 
 @product_delete_blueprint.route("/product/<int:id>", methods=['DELETE'])
+@jwt_required()
 def delete_product(id):
     error = product_delete(id)
     if error:

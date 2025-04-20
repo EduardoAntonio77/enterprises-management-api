@@ -2,10 +2,12 @@ from flask import jsonify, Blueprint;
 
 from middlewares.enterprise.enterprise_delete_middleware import enterprise_delete_middleware;
 from controllers.enterprise.enterprise_delete_controller import enterprise_delete_controller;
+from flask_jwt_extended import jwt_required
 
 enterprise_delete_blueprint = Blueprint('enterprise_delete_route', __name__)
 
 @enterprise_delete_blueprint.route('/enterprise/<int:id>', methods=['DELETE'])
+@jwt_required()
 def delete_enterprise(id):
     error = enterprise_delete_middleware(id)
     
