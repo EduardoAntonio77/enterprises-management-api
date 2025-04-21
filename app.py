@@ -2,10 +2,12 @@
 from flask import Flask;
 from flask_cors import CORS;
 from flask_migrate import Migrate;
+
 from database import database;
-from config.jwt_utils.manager import init_jwt
-from flask_jwt_extended import JWTManager
 from routes import register_routes;
+
+from flask_jwt_extended import JWTManager
+from config.jwt_utils.manager import init_jwt
 
 # essential config
 app = Flask(__name__);
