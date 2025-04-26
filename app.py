@@ -58,8 +58,4 @@ class App:
     def run(self, **kwargs):
         self.app.run(**kwargs)
 
-if __name__ == '__main__':
-     app_instance = App()
-     app_instance.run(debug=True)
-
 # Nota para nao esquecer: O self nos argumentos de cada função serve como referencia a instancia atual da classe. Quando chamado nos argumentos, basicamente esta acessando o nonme da propria instancia.
