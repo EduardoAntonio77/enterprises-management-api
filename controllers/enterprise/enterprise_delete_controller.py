@@ -1,4 +1,4 @@
-from database import database;
+from config.database import database;
 from models.enterprise_model import Enterprise;
 from datetime import datetime, timezone;
 

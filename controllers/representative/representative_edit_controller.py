@@ -1,4 +1,4 @@
-from database import database # Imports
+from config.database import database # Imports
 
 def edit_representative_controller(repre, data): # Criando uma função que recebe como parametros "repre" que ja é o representante buscado na rota, e "data" que sera um dicionario contendo os novo dados passados em "request_get.json" na rota.
 

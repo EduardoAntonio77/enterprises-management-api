@@ -1,4 +1,4 @@
-from database import database;
+from config.database import database;
 from models.representative_model import Representative;
 from datetime import timezone, datetime;
 

@@ -1,4 +1,4 @@
-from database import database
+from config.database import database
 from models.product_model import Product
 
 def product_edit_controller(id, data):

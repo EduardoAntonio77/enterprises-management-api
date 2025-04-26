@@ -1,4 +1,4 @@
-from database import database;
+from config.database import database;
 
 # importando modelos
 from .representative_model import Representative;

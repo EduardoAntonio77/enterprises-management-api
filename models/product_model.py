@@ -1,5 +1,5 @@
 # imports
-from database import database;
+from config.database import database;
 from datetime import timezone, datetime;
 
 # products model

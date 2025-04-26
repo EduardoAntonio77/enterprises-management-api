@@ -1,4 +1,4 @@
-from database import database 
+from config.database import database 
 
 def client_edit_controller(data, client):
 

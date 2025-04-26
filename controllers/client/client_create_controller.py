@@ -1,4 +1,4 @@
-from database import database
+from config.database import database
 from models.client_model import Client
 
 def client_create_controller(data):

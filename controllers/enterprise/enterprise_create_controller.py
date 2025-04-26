@@ -1,5 +1,5 @@
 # Imports
-from database import database
+from config.database import database
 from models.enterprise_model import Enterprise
 
 def create_enterprise(data):

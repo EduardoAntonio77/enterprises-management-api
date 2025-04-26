@@ -1,5 +1,5 @@
 # Imports
-from database import database 
+from config.database import database 
 
 def enterprise_edit_controller(data, enterprise):
 

@@ -3,7 +3,7 @@ from flask import Flask;
 from flask_cors import CORS;
 from flask_migrate import Migrate;
 
-from database import database;
+from config.database import database;
 from routes import register_routes;
 
 from flask_jwt_extended import JWTManager

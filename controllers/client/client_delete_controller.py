@@ -1,6 +1,6 @@
 from flask import jsonify
 from models.client_model import Client
-from database import database
+from config.database import database
 from datetime import datetime, timezone
 from middlewares.client.client_delete_middleware import validate_client_exists
 
