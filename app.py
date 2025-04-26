@@ -9,6 +9,11 @@ from routes import register_routes;
 from flask_jwt_extended import JWTManager
 from config.jwt_utils.manager import init_jwt
 
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
 # Classe que sera responsavel pela criação, configuração e execução da aplicação
 class App:
 
@@ -28,7 +33,7 @@ class App:
     def configure_app(self):
 
         # Define a URL ou caminho de conexão ao banco de dados MySQL
-        self.app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:2905@localhost:3306/enterpriseapi'
+        self.app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
         
         # Desativa uma opção do SQLAlchemy que monitora em tempo real modificações no projeto (è ativada por padrão porem, para econimia de recursos é melhor desativa-la).
         self.app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
