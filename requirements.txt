@@ -1,6 +1,7 @@
-flask
-flask_cors
-flask_migrate
-flask_jwt_extended
-pymysql
-flask_sqlalchemy
+Flask
+Flask-Cors
+Flask-Migrate
+Flask-JWT-Extended
+PyMySQL
+Flask-SQLAlchemy
+python-dotenv
