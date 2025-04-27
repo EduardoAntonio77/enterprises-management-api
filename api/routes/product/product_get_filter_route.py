@@ -1,0 +1,12 @@
+from flask import Blueprint, g
+from middlewares.product.product_get_filter_middleware import product_search
+from controllers.product.product_get_filter_controller import product_filter
+from flask_jwt_extended import jwt_required
+
+product_get_filter_blueprint = Blueprint("product_get_filter_route", __name__)
+
+@product_get_filter_blueprint.route("/product/<int:id>", methods=["GET"])
+@product_search()
+@jwt_required()
+def product_get(id, product):
+    return product_filter(product=product, id=id)
