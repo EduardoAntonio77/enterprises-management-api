@@ -5,4 +5,4 @@ Flask-JWT-Extended
 PyMySQL
 Flask-SQLAlchemy
 python-dotenv
-vercel
+waitress
