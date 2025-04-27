@@ -2,7 +2,7 @@ from models.enterprise_model import Enterprise
 from models.representative_model import Representative
 
 def enterprise_create(data): 
-    required_fields = ['name', 'client_quantity', 'address', 'phone', 'enterprise_id']
+    required_fields = ['name', 'client_quantity', 'address', 'phone', 'representative_id']
     for field in required_fields:
         if field not in data:
             return f"Missing field: {field}"
