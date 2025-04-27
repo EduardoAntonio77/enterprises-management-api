@@ -7,6 +7,7 @@ from waitress import serve
 # Cria uma instância da aplicação
 app_instance = App()
 flask_app = app_instance.app
+flask_app.config['DEBUG'] = True
 
 # Para rodar localmente com `python server.py`
 if __name__ == "__main__":
