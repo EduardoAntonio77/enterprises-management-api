@@ -5,9 +5,9 @@ from flask import jsonify
 def enterprise_filter(enterprise, id):
     return jsonify({
         "id": enterprise.id,
-        "email": enterprise.email,
+        "client_quantity": enterprise.client_quantity,
         "name": enterprise.name,
-        'cnpj': enterprise.cnpj,
+        'address': enterprise.address,
         "phone": enterprise.phone,
         "created_at": enterprise.created_at.isoformat()
     }), 200
