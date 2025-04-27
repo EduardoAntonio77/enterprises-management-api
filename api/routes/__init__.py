@@ -22,6 +22,7 @@ def register_routes(app):
     from .client.client_delete_route import client_delete_blueprint
     from .client.client_edit_route import client_edit_blueprint
     from .client.client_get_route import client_get_blueprint
+    from .client.client_get_filter_route import client_get_filter_blueprint
 
     # Product_route
     from .product.product_create_route import product_create_blueprint
@@ -54,6 +55,7 @@ def register_routes(app):
     app.register_blueprint(client_delete_blueprint)
     app.register_blueprint(client_edit_blueprint)
     app.register_blueprint(client_get_blueprint)
+    app.register_blueprint(client_get_filter_blueprint)
 
     # product
     app.register_blueprint(product_create_blueprint)
