@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
 from flask_jwt_extended import jwt_required
-from api.controllers.product.product_get_controller import get_products
+from controllers.product.product_get_controller import get_products
 
 product_get_blueprint = Blueprint('product_get_route', __name__)
 
