@@ -1,5 +1,3 @@
-from models.enterprise_model import Enterprise
-
 from flask import jsonify
 
 def enterprise_filter(enterprise, id):
