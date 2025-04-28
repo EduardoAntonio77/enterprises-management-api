@@ -12,6 +12,8 @@ from config.jwt_utils.manager import init_jwt
 from dotenv import load_dotenv
 import os
 
+from flasgger import Swagger
+
 load_dotenv()
 
 # Classe que sera responsavel pela criação, configuração e execução da aplicação
@@ -40,6 +42,15 @@ class App:
 
     def configure_extensions(self):
 
+        Swagger(self.app, template={
+        "swagger": "2.0",
+        "info": {
+            "title": "Enterprises Management API",
+            "description": "enterprises-management-api oficial documentation.",
+            "version": "0.1"
+        }
+    })
+        
         # Ativa o CORS permitindo requisições do frontend.
         CORS(self.app, origins='http://localhost:3000')
 
