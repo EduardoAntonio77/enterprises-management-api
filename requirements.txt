@@ -19,3 +19,6 @@ flask-sqlalchemy
 python-dotenv
 
 waitress
+
+pytest
+Pytest
