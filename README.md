@@ -1,38 +1,76 @@
 # Enterprises Management API
+==========================
 
-This API is designed to manage enterprise data efficiently. Follow the instructions below to set it up and run the server.
+This API is designed to manage enterprise data efficiently. It follows a clean architecture using controllers, services, middlewares, and a relational MySQL database with SQLAlchemy.
 
 ## Prerequisites
-
-Before running the API, ensure that you have the following installed:
+-------------
+Make sure you have the following installed on your system:
 - Python 3.x
-- MySQL database
-- `pip` for managing dependencies
+- MySQL
+- pip (Python package manager)
 
 ## Installation
+------------
+1. Install dependencies:
+   From the root directory of the project, run:
+```bash
+pip install -r requirements.txt
+```
 
-1. **Install dependencies**:
-   
-   In the root directory of the project, run the following command to install the required dependencies:
+2. Configure environment variables:
+   Inside the /api folder, create a .env file based on the .env.example.
+   It should contain:
 
-   ```bash
-        pip install -r requirements.txt
+   ```ini
+   JWT_SECRET_KEY="your-cool-jwt-secret-here-in-string-format"
+   JWT_ACCESS_TOKEN_EXPIRES=3600
+   DATABASE_URL="your-cool-mysql-database-url-here"
    ```
 
-2. **Set up environment variables:**
-    Inside the `/api` folder, create a `.env` file based on the format provided in `.env.example.` You need to configure the following variables:
-    ```ini
-        JWT_SECRET_KEY="your-cool-jwt-secret-here-in-string-format"
-        JWT_ACCESS_TOKEN_EXPIRES=3600  # 3600 seconds = 1 hour
-        DATABASE_URL="your-cool-mysql-database-url-here"
-    ```
-    Make sure to replace the placeholder values with your own JWT secret key and MySQL database URL.
-
 ## Running the Server
-Once you've set up the environment variables, you can run the API server.
-
-To start the server, use the following command from the root project folder (`/enterprises-management-api`):
-
+------------------
+From the root folder (/enterprises-management-api), run:
 ```bash
 python ./api/server.py
 ```
+
+## server.py
+---------
+This is the entry point of the application. It creates an instance of the Flask app, enables debug mode, and starts the server using Waitress to serve the app on port 5000.
+
+## app.py
+------
+This file is responsible for configuring the Flask application. It:
+- Loads environment variables
+- Connects to the MySQL database using SQLAlchemy
+- Enables CORS to allow requests from the frontend
+- Sets up migrations using Flask-Migrate
+- Initializes JWT authentication
+- Registers all application routes
+- Enables Swagger API documentation
+
+## About the API
+-------------
+### The API provides endpoints for:
+
+- client: create, delete, edit, get (filtered and all)
+- enterprise: create, delete, edit, get (filtered and all)
+- product: create, delete, edit, get (filtered and all)
+- representative: login, create, delete, edit, get (filtered and all)
+
+All routes use middleware and controller layers. Database models are managed using SQLAlchemy.
+
+### Database structure
+------------------
+- A representative is the owner of an enterprise.
+- An enterprise is linked to clients and products.
+- Clients and products are not directly related to each other.
+
+## How to Use
+----------
+1. First, log in using the representative login route.
+2. Use the returned bearer token to authorize requests.
+3. Create an enterprise.
+4. Create a representative linked to the created enterprise.
+5. With the representative and enterprise in place, you can now create clients and products associated with that enterprise.
