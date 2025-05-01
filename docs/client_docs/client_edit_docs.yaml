@@ -1,0 +1,55 @@
+tags:
+  - Client
+summary: "Endpoint para editar as informações de um cliente."
+description: "Este endpoint permite editar as informações de um cliente utilizando o ID fornecido."
+parameters:
+  - name: "id"
+    in: "path"
+    required: true
+    type: "integer"
+    description: "ID do cliente a ser atualizado."
+    example: 1
+  - name: "body"
+    in: "body"
+    required: true
+    schema:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+          example: "Nome do Cliente"
+        email:
+          type: "string"
+          example: "email@cliente.com"
+        phone:
+          type: "string"
+          example: "+55 11 91234-5678"
+      required:
+        - name
+        - email
+        - phone
+responses:
+  200:
+    description: "Cliente atualizado com sucesso!"
+    examples:
+      application/json:
+        status: 200
+        message: "Client updated successfully"
+  404:
+    description: "Cliente não encontrado."
+    examples:
+      application/json:
+        status: 404
+        message: "Client not found"
+  400:
+    description: "Erro ao tentar atualizar o cliente."
+    examples:
+      application/json:
+        status: 400
+        message: "Error updating client"
+  401:
+    description: "Token JWT inválido ou não fornecido."
+    examples:
+      application/json:
+        status: 401
+        message: "Token is missing or invalid"
