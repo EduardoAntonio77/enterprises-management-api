@@ -1,0 +1,54 @@
+summary: Endpoint para editar uma empresa pelo ID.
+tags:
+  - Enterprise
+description: Endpoint para editar uma empresa pelo ID.
+parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+    description: ID da empresa a ser editada
+    example: 1
+  - name: body
+    in: body
+    required: true
+    schema:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Empresa X
+        email:
+          type: string
+          example: empresa@example.com
+        address:
+          type: string
+          example: Rua Exemplo, 123
+      required:
+        - name
+        - email
+responses:
+  200:
+    description: Empresa atualizada com sucesso.
+    examples:
+      application/json:
+        status: 200
+        message: Enterprise updated successfully
+  400:
+    description: Erro de validação ou dados inválidos.
+    examples:
+      application/json:
+        status: 400
+        message: "Erro: Dados de empresa inválidos."
+  404:
+    description: Empresa não encontrada.
+    examples:
+      application/json:
+        status: 404
+        message: Enterprise not found
+  401:
+    description: Token de autenticação inválido ou ausente.
+    examples:
+      application/json:
+        status: 401
+        message: Token de autenticação ausente ou inválido.
