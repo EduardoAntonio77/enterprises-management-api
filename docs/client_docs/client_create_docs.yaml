@@ -12,16 +12,22 @@ parameters:
         name:
           type: string
           example: "João da Silva"
-        email:
+        region:
           type: string
-          example: "joao.silva@empresa.com"
+          example: "Osasco/SP"
         phone:
           type: string
           example: "+55 11 91234-5678"
+        enterprise_id:
+          type: integer
+          example: 2
+        
       required:
         - name
-        - email
+        - region
         - phone
+        - cpf
+        - enterprise_id
 responses:
   200:
     description: "Cliente registrado com sucesso!"
