@@ -1,0 +1,30 @@
+summary: Endpoint para excluir uma empresa pelo ID.
+tags:
+  - Enterprise
+description: Endpoint para excluir uma empresa pelo ID.
+parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+    description: ID da empresa a ser deletada
+    example: 1
+responses:
+  200:
+    description: Empresa excluída com sucesso.
+    examples:
+      application/json:
+        status: 200
+        message: Enterprise successfully deleted!
+  400:
+    description: Erro ao tentar excluir a empresa, talvez o ID não exista.
+    examples:
+      application/json:
+        status: 400
+        message: "Erro: Empresa não encontrada."
+  401:
+    description: Token de autenticação inválido ou ausente.
+    examples:
+      application/json:
+        status: 401
+        message: Token de autenticação ausente ou inválido.
