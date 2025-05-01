@@ -18,8 +18,9 @@ def test_enterprise_delete(client, login_jwt):
         "Authorization": f"Bearer {token}"
     }
 
-    enterprise_id = 2
+    client_id = 4
 
-    route_response = client.delete(f"/client/{enterprise_id}", headers=headers)
+    route_response = client.delete(f"/client/{client_id}", headers=headers)
+    print(f"Resposta da API: {route_response.json}")
 
     assert route_response.status_code == 200
