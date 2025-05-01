@@ -1,0 +1,13 @@
+summary: "Endpoint raiz da API."
+tags:
+  - Home page
+description: |
+  Endpoint raiz que retorna informações da API.
+responses:
+  200:
+    description: Informações da API de empresas retornadas com sucesso!
+    examples:
+      application/json:
+        status: 200
+        message: Enterprises Database
+        version: 0.1
