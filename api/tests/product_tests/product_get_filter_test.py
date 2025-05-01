@@ -18,7 +18,7 @@ def test_client_get_filter(product):
         "Authorization": f"Bearer {token}"
     }
 
-    product_id = 3
+    product_id = 4
 
     route_response = product.get(f"product/{product_id}", headers=headers)
 
