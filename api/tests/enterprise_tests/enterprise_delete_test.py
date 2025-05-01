@@ -18,7 +18,7 @@ def test_enterprise_delete(enterprise, login_jwt):
         "Authorization": f"Bearer {token}"
     }
 
-    enterprise_id = 2  
+    enterprise_id = 7
 
     route_response = enterprise.delete(f"/enterprise/{enterprise_id}", headers=headers)
 
