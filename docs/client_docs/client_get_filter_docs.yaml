@@ -1,0 +1,35 @@
+tags:
+  - Client
+summary: "Endpoint para buscar um cliente específico pelo seu ID."
+description: "Este endpoint permite buscar um cliente específico utilizando o seu ID."
+parameters:
+  - name: "id"
+    in: "path"
+    required: true
+    type: "integer"
+    description: "ID do cliente a ser buscado."
+    example: 1
+responses:
+  200:
+    description: "Cliente encontrado com sucesso!"
+    examples:
+      application/json:
+        status: 200
+        message: "Client found"
+        data:
+          id: 1
+          name: "Cliente Exemplo"
+          email: "cliente@exemplo.com"
+          phone: "+55 11 91234-5678"
+  404:
+    description: "Cliente não encontrado."
+    examples:
+      application/json:
+        status: 404
+        message: "Client not found"
+  401:
+    description: "Token JWT inválido ou não fornecido."
+    examples:
+      application/json:
+        status: 401
+        message: "Token is missing or invalid"
