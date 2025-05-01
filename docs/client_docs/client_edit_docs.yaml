@@ -1,7 +1,7 @@
 tags:
   - Client
 summary: "Endpoint para editar as informações de um cliente."
-description: "Este endpoint permite editar as informações de um cliente utilizando o ID fornecido."
+description: "Este endpoint permite editar uma ou mais informações de um cliente utilizando o ID fornecido."
 parameters:
   - name: "id"
     in: "path"
@@ -24,10 +24,6 @@ parameters:
         phone:
           type: "string"
           example: "+55 11 91234-5678"
-      required:
-        - name
-        - email
-        - phone
 responses:
   200:
     description: "Cliente atualizado com sucesso!"
