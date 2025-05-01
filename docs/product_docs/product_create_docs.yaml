@@ -1,0 +1,43 @@
+tags:
+  - Product
+summary: "Endpoint para registrar um novo produto."
+description: "Este endpoint permite registrar um novo produto no sistema."
+parameters:
+  - name: "body"
+    in: "body"
+    required: true
+    schema:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+          example: "Cadeira de Escritório"
+        price:
+          type: "number"
+          example: 299.99
+        stock:
+          type: "integer"
+          example: 150
+      required:
+        - "name"
+        - "price"
+        - "stock"
+responses:
+  200:
+    description: "Produto registrado com sucesso."
+    examples:
+      application/json:
+        status: 200
+        message: "Successfully registered product"
+  400:
+    description: "Erro de validação dos dados enviados."
+    examples:
+      application/json:
+        status: 400
+        message: "Campo 'name' é obrigatório."
+  401:
+    description: "Token de autenticação inválido ou ausente."
+    examples:
+      application/json:
+        status: 401
+        message: "Token de autenticação ausente ou inválido."
