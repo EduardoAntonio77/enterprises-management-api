@@ -12,12 +12,8 @@ responses:
         data:
           - id: 1
             name: "Cliente 1"
-            email: "cliente1@exemplo.com"
-            phone: "+55 11 91234-5678"
           - id: 2
             name: "Cliente 2"
-            email: "cliente2@exemplo.com"
-            phone: "+55 11 98765-4321"
   401:
     description: "Token JWT inválido ou não fornecido."
     examples:
