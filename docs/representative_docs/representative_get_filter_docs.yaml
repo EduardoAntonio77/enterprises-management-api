@@ -1,0 +1,30 @@
+summary: Endpoint para buscar um representante com base em filtros.
+tags:
+  - Representative
+description: Endpoint para buscar um representante com base em filtros.
+parameters:
+  - name: id
+    in: path
+    required: true
+    description: ID do representante que será filtrado.
+    schema:
+      type: integer
+    example: 123
+responses:
+  200:
+    description: Representante encontrado com sucesso!
+    examples:
+      application/json:
+        status: 200
+        message: Representante encontrado!
+        representative:
+          id: 123
+          name: João da Silva
+          email: joao@email.com
+          phone: "+55 11 91234-5678"
+  404:
+    description: Representante não encontrado.
+    examples:
+      application/json:
+        status: 404
+        message: Representante não encontrado.
