@@ -1,0 +1,24 @@
+summary: Endpoint para excluir um representante.
+tags:
+  - Representative
+description: Endpoint para excluir um representante pelo ID.
+parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+    description: ID do representante a ser excluído
+    example: 1
+responses:
+  200:
+    description: Representante excluído com sucesso!
+    examples:
+      application/json:
+        status: 200
+        message: Representative successfully deleted!
+  400:
+    description: Erro ao tentar excluir o representante.
+    examples:
+      application/json:
+        status: 400
+        message: "Erro: Representante não encontrado."
