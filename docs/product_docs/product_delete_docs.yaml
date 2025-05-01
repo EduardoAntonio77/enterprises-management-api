@@ -1,0 +1,30 @@
+tags:
+  - Product
+summary: "Endpoint para deletar um produto pelo ID."
+description: "Este endpoint permite excluir um produto do sistema, dado seu ID."
+parameters:
+  - name: "id"
+    in: "path"
+    required: true
+    type: "integer"
+    description: "ID do produto a ser deletado"
+    example: 1
+responses:
+  200:
+    description: "Produto deletado com sucesso."
+    examples:
+      application/json:
+        status: 200
+        message: "Product successfully deleted"
+  404:
+    description: "Produto não encontrado."
+    examples:
+      application/json:
+        status: 404
+        error: "Produto não encontrado"
+  401:
+    description: "Token de autenticação inválido ou ausente."
+    examples:
+      application/json:
+        status: 401
+        message: "Token de autenticação ausente ou inválido."
