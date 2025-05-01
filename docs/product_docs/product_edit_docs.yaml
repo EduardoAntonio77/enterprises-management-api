@@ -1,0 +1,55 @@
+tags:
+  - Product
+summary: "Endpoint para editar um produto pelo ID."
+description: "Este endpoint permite editar as informações de um produto existente no sistema, dado seu ID."
+parameters:
+  - name: "id"
+    in: "path"
+    required: true
+    type: "integer"
+    description: "ID do produto a ser editado"
+    example: 1
+  - name: "body"
+    in: "body"
+    required: true
+    schema:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+          example: "Produto Editado"
+        price:
+          type: "number"
+          format: "float"
+          example: 99.99
+        description:
+          type: "string"
+          example: "Descrição do produto editada"
+      required:
+        - "name"
+        - "price"
+responses:
+  200:
+    description: "Produto atualizado com sucesso."
+    examples:
+      application/json:
+        status: 200
+        message: "Product updated successfully"
+  400:
+    description: "Erro na validação dos dados ou erro no controller."
+    examples:
+      application/json:
+        status: 400
+        error: "Erro: O nome do produto é obrigatório."
+  401:
+    description: "Token de autenticação inválido ou ausente."
+    examples:
+      application/json:
+        status: 401
+        message: "Token de autenticação ausente ou inválido."
+  404:
+    description: "Produto não encontrado."
+    examples:
+      application/json:
+        status: 404
+        error: "Produto não encontrado"
