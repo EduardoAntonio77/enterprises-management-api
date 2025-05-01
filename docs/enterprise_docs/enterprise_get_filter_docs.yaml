@@ -1,0 +1,34 @@
+tags:
+  - Enterprise
+summary: "Endpoint para obter os dados de uma empresa pelo ID."
+description: "Este endpoint permite recuperar os dados de uma empresa específica com base no seu ID."
+parameters:
+  - name: "id"
+    in: "path"
+    required: true
+    type: "integer"
+    description: "ID da empresa que será filtrada"
+    example: 1
+responses:
+  200:
+    description: "Empresa encontrada com sucesso."
+    examples:
+      application/json:
+        status: 200
+        data:
+          id: 1
+          name: "Empresa X"
+          email: "empresa@example.com"
+          address: "Rua Exemplo, 123"
+  404:
+    description: "Empresa não encontrada."
+    examples:
+      application/json:
+        status: 404
+        message: "Enterprise not found"
+  401:
+    description: "Token de autenticação inválido ou ausente."
+    examples:
+      application/json:
+        status: 401
+        message: "Token de autenticação ausente ou inválido."
