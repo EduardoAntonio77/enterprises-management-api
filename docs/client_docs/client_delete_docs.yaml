@@ -1,0 +1,30 @@
+tags:
+  - Client
+summary: "Endpoint para deletar um cliente."
+description: "Este endpoint permite excluir um cliente do sistema utilizando o ID fornecido."
+parameters:
+  - name: "id"
+    in: "path"
+    required: true
+    type: "integer"
+    description: "ID do cliente que será deletado."
+    example: 1
+responses:
+  200:
+    description: "Cliente deletado com sucesso!"
+    examples:
+      application/json:
+        status: 200
+        message: "Client successfully deleted"
+  404:
+    description: "Cliente não encontrado."
+    examples:
+      application/json:
+        status: 404
+        message: "Client not found"
+  401:
+    description: "Token JWT inválido ou não fornecido."
+    examples:
+      application/json:
+        status: 401
+        message: "Token is missing or invalid"
