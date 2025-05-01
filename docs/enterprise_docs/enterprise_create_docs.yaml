@@ -1,0 +1,47 @@
+summary: Endpoint para registrar uma nova empresa.
+tags:
+  - Enterprise
+description: Endpoint para registrar uma nova empresa.
+parameters:
+  - name: body
+    in: body
+    required: true
+    schema:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Tech Solutions
+        address:
+          type: string
+          example: Rua das Empresas, 123
+        email:
+          type: string
+          example: contato@techsolutions.com.br
+        phone:
+          type: string
+          example: "+55 11 91234-5678"
+      required:
+        - name
+        - address
+        - email
+        - phone
+responses:
+  200:
+    description: Empresa registrada com sucesso.
+    examples:
+      application/json:
+        status: 200
+        message: Successfully registered enterprise
+  400:
+    description: Erro na validação dos dados enviados.
+    examples:
+      application/json:
+        status: 400
+        error: Campo "name" é obrigatório.
+  401:
+    description: Token de autenticação inválido ou ausente.
+    examples:
+      application/json:
+        status: 401
+        message: Token de autenticação ausente ou inválido.
