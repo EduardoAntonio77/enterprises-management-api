@@ -1,0 +1,41 @@
+summary: Endpoint para excluir um representante.
+tags:
+  - Representative
+description: Endpoint para registrar um novo representante na empresa.
+parameters:
+  - name: body
+    in: body
+    required: true
+    schema:
+      type: object
+      properties:
+        name:
+          type: string
+          example: João da Silva
+        email:
+          type: string
+          example: joao@email.com
+        phone:
+          type: string
+          example: +55 11 91234-5678
+        password:
+          type: string
+          example: joao1234
+      required:
+        - name
+        - email
+        - phone
+        - password
+responses:
+  200:
+    description: Representante registrado com sucesso!
+    examples:
+      application/json:
+        status: 200
+        message: Successfully registered representative!
+  400:
+    description: Erro na validação dos dados enviados.
+    examples:
+      application/json:
+        status: 400
+        message: Campo "email" é obrigatório.
