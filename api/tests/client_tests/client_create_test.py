@@ -22,10 +22,10 @@ def test_client_success(client, login_jwt):
     }
 
     body_request = {
-        "name": "Joaquim",
-        "region": "Osasco",
-        "phone": "1123823123",
-        "cpf": "28372932",
+        "name": "Joaquimm",
+        "region": "Osascoo",
+        "phone": "112382323123123",
+        "cpf": "2837293223",
         "enterprise_id": 2
     }
 
