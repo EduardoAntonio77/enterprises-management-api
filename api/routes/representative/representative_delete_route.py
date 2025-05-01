@@ -9,44 +9,8 @@ delete_representative_blueprint = Blueprint("representative_routes", __name__)
 
 @delete_representative_blueprint.route('/representative/<int:id>', methods=['DELETE'])
 @jwt_required()
-@swag_from({
-    'tags': ['Representative'],
-    'description': 'Endpoint para excluir um representante pelo ID.',
-    'parameters': [
-        {
-            'name': 'id',
-            'in': 'path',
-            'required': True,
-            'type': 'integer',
-            'description': 'ID do representante a ser excluído',
-            'example': 1
-        }
-    ],
-    'responses': {
-        200: {
-            'description': 'Representante excluído com sucesso!',
-            'examples': {
-                'application/json': {
-                    'status': 200,
-                    'message': 'Representative successfully deleted!'
-                }
-            }
-        },
-        400: {
-            'description': 'Erro ao tentar excluir o representante.',
-            'examples': {
-                'application/json': {
-                    'status': 400,
-                    'message': 'Erro: Representante não encontrado.'
-                }
-            }
-        }
-    }
-})
+@swag_from("../../../docs/representative_docs/representative_delete_docs.yaml")
 def delete_representative(id):
-    """
-    Endpoint para excluir um representante.
-    """
 
     error = representative_delete_middleware(id)
 

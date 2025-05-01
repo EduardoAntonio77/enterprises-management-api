@@ -11,60 +11,9 @@ create_enterprise_blueprint = Blueprint('create_enterprise_blueprint', __name__)
 
 @create_enterprise_blueprint.route('/enterprise', methods=['POST'])
 @jwt_required()
-@swag_from({
-    'tags': ['Enterprise'],
-    'description': 'Endpoint para registrar uma nova empresa.',
-    'parameters': [
-        {
-            'name': 'body',
-            'in': 'body',
-            'required': True,
-            'schema': {
-                'type': 'object',
-                'properties': {
-                    'name': {'type': 'string', 'example': 'Tech Solutions'},
-                    'address': {'type': 'string', 'example': 'Rua das Empresas, 123'},
-                    'email': {'type': 'string', 'example': 'contato@techsolutions.com.br'},
-                    'phone': {'type': 'string', 'example': '+55 11 91234-5678'}
-                },
-                'required': ['name', 'address', 'email', 'phone']
-            }
-        }
-    ],
-    'responses': {
-        200: {
-            'description': 'Empresa registrada com sucesso.',
-            'examples': {
-                'application/json': {
-                    'status': 200,
-                    'message': 'Successfully registered enterprise'
-                }
-            }
-        },
-        400: {
-            'description': 'Erro na validação dos dados enviados.',
-            'examples': {
-                'application/json': {
-                    'status': 400,
-                    'error': 'Campo "name" é obrigatório.'
-                }
-            }
-        },
-        401: {
-            'description': 'Token de autenticação inválido ou ausente.',
-            'examples': {
-                'application/json': {
-                    'status': 401,
-                    'message': 'Token de autenticação ausente ou inválido.'
-                }
-            }
-        }
-    }
-})
+@swag_from("../../../docs/enterprise_docs/enterprise_create_docs.yaml")
 def register_enterprise():
-    """
-    Endpoint para registrar uma nova empresa.
-    """
+
     # Dados recebidos via POST
     data = request.json
 

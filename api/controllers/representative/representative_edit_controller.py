@@ -1,9 +1,10 @@
-from config.database import database # Imports
+from flask import jsonify
+from config.database import database
 
-def edit_representative_controller(repre, data): # Criando uma função que recebe como parametros "repre" que ja é o representante buscado na rota, e "data" que sera um dicionario contendo os novo dados passados em "request_get.json" na rota.
-
+def edit_representative_controller(repre, data):
+    
     if 'name' in data:
-        repre.name = data['name'] # Verificando se o campo "name" foi enviado na requisição e caso sim, atualizara o atributo "name" do objeto "repre" com esse novo valor (isso sera repetido nas linhas abaixo.)
+        repre.name = data['name']
     if 'cnpj' in data:
         repre.cnpj = data['cnpj']
     if 'email' in data:
@@ -11,6 +12,11 @@ def edit_representative_controller(repre, data): # Criando uma função que rece
     if 'phone' in data:
         repre.phone = data['phone']
     
-    database.session.commit() # Salvando no banco de dados as alterações feitas.
+   
+    database.session.commit()
 
-    # OBS: Não é necessario atualizar todos os atributos do representante, é necessario que cada campo esteja dentro de um if para que o usuario tenha a liberdade de editar apenas os atributos que deseja.
+   
+    return jsonify({
+        'status': 200,
+        'message': 'Representative successfully updated!'
+    }), 200

@@ -9,53 +9,8 @@ product_delete_blueprint = Blueprint('delete_product_blueprint', __name__)
 
 @product_delete_blueprint.route("/product/<int:id>", methods=['DELETE'])
 @jwt_required()
-@swag_from({
-    'tags': ['Product'],
-    'description': 'Endpoint para deletar um produto pelo ID.',
-    'parameters': [
-        {
-            'name': 'id',
-            'in': 'path',
-            'required': True,
-            'type': 'integer',
-            'description': 'ID do produto a ser deletado',
-            'example': 1
-        }
-    ],
-    'responses': {
-        200: {
-            'description': 'Produto deletado com sucesso.',
-            'examples': {
-                'application/json': {
-                    'status': 200,
-                    'message': 'Product successfully deleted'
-                }
-            }
-        },
-        404: {
-            'description': 'Produto não encontrado.',
-            'examples': {
-                'application/json': {
-                    'status': 404,
-                    'error': 'Produto não encontrado'
-                }
-            }
-        },
-        401: {
-            'description': 'Token de autenticação inválido ou ausente.',
-            'examples': {
-                'application/json': {
-                    'status': 401,
-                    'message': 'Token de autenticação ausente ou inválido.'
-                }
-            }
-        }
-    }
-})
+@swag_from("../../../docs/product_docs/product_delete_docs.yaml")
 def delete_product(id):
-    """
-    Endpoint para deletar um produto pelo ID.
-    """
 
     error = product_delete(id)
     if error:

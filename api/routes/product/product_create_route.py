@@ -9,59 +9,9 @@ product_create_blueprint = Blueprint('create_product_blueprint', __name__)
 
 @product_create_blueprint.route("/product", methods=['POST'])
 @jwt_required()
-@swag_from({
-    'tags': ['Product'],
-    'description': 'Endpoint para registrar um novo produto.',
-    'parameters': [
-        {
-            'name': 'body',
-            'in': 'body',
-            'required': True,
-            'schema': {
-                'type': 'object',
-                'properties': {
-                    'name': {'type': 'string', 'example': 'Cadeira de Escritório'},
-                    'price': {'type': 'number', 'example': 299.99},
-                    'stock': {'type': 'integer', 'example': 150}
-                },
-                'required': ['name', 'price', 'stock']
-            }
-        }
-    ],
-    'responses': {
-        200: {
-            'description': 'Produto registrado com sucesso.',
-            'examples': {
-                'application/json': {
-                    'status': 200,
-                    'message': 'Successfully registered product'
-                }
-            }
-        },
-        400: {
-            'description': 'Erro de validação dos dados enviados.',
-            'examples': {
-                'application/json': {
-                    'status': 400,
-                    'message': 'Campo "name" é obrigatório.'
-                }
-            }
-        },
-        401: {
-            'description': 'Token de autenticação inválido ou ausente.',
-            'examples': {
-                'application/json': {
-                    'status': 401,
-                    'message': 'Token de autenticação ausente ou inválido.'
-                }
-            }
-        }
-    }
-})
+@swag_from("../../../docs/product_docs/product_create_docs.yaml")
 def register_product():
-    """
-    Endpoint para criação de produtos.
-    """
+
     data = request.json
 
     error = product_create(data)

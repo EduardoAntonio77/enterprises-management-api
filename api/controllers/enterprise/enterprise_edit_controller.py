@@ -1,7 +1,7 @@
 # Imports
 from config.database import database 
-
-def enterprise_edit_controller(data, enterprise):
+from flask import jsonify
+def enterprise_edit_controller(enterprise, data):
 
     if 'name' in data:
         enterprise.name = data['name']
@@ -13,3 +13,9 @@ def enterprise_edit_controller(data, enterprise):
         enterprise.phone = data['phone']
 
     database.session.commit()
+
+
+    return jsonify({
+        'status': 200,
+        'message': 'Enterprise successfully updated!'
+    }), 200

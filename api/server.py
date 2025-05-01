@@ -19,5 +19,3 @@ if __name__ == "__main__":
     print(f"API running in: http://127.0.0.1:{port_dotenv}")
     print("API Documentation running in: http://localhost:5000/apidocs")
     serve(flask_app, host="0.0.0.0", port=port_dotenv)
-
-    

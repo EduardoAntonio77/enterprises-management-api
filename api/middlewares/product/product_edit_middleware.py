@@ -11,4 +11,4 @@ def product_edit(data, id):
         if not enterprise:
             return "Enterprise not found"
 
-    return None
+    return product
