@@ -1,0 +1,37 @@
+tags:
+  - Client
+summary: "Endpoint para registrar um novo cliente."
+description: "Este endpoint permite registrar um novo cliente, fornecendo informações como nome, email e telefone."
+parameters:
+  - name: body
+    in: body
+    required: true
+    schema:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "João da Silva"
+        email:
+          type: string
+          example: "joao.silva@empresa.com"
+        phone:
+          type: string
+          example: "+55 11 91234-5678"
+      required:
+        - name
+        - email
+        - phone
+responses:
+  200:
+    description: "Cliente registrado com sucesso!"
+    examples:
+      application/json:
+        status: 200
+        message: "Successfully registered client"
+  400:
+    description: "Erro na validação dos dados enviados."
+    examples:
+      application/json:
+        status: 400
+        message: "Erro: nome do cliente é obrigatório."
