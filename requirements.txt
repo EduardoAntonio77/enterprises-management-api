@@ -22,3 +22,6 @@ waitress
 
 pytest
 Pytest
+
+Flasgger
+flasgger
