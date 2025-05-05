@@ -1,8 +1,17 @@
 # imports
 from flask import Flask;
+from flask import jsonify
 from flask_cors import CORS;
 from flask_migrate import Migrate;
+
 from flask_talisman import Talisman
+
+from flask_limiter.errors import RateLimitExceeded
+
+from flask_limiter import Limiter
+from config.limiter import init_limiter
+
+from redis import Redis
 
 from config.database import database;
 from routes import register_routes;
@@ -33,6 +42,14 @@ class App:
         # Chama a função responsavel pela adição das rotas ao app
         self.register_routes()
 
+        @self.app.errorhandler(RateLimitExceeded)
+        def ratelimit_handler(e):
+            return jsonify({
+                "error": "You have exceeded the number of allowed requests.",
+                "message": "Please try again later.",
+                "status": 429
+            }), 429
+
     def configure_app(self):
 
         # Define a URL ou caminho de conexão ao banco de dados MySQL
@@ -55,9 +72,17 @@ class App:
         Talisman(
         self.app,
         content_security_policy=None,  # ou personalize conforme necessidade
-        force_https=False  # deixe como False se for rodar localmente ou com HTTP
+        force_https=True  # deixe como False se for rodar localmente ou com HTTP
     )
         
+        # Inicializa o rate limiter
+        init_limiter(self.app)
+
+        # Configuração do Redis para Flask-Limiter
+        redis = Redis.from_url('redis://localhost:6379')
+        self.limiter = Limiter(self.app, storage_uri='redis://localhost:6379')
+
+
         # Ativa o CORS permitindo requisições do frontend.
         CORS(self.app, origins='http://localhost:3000')
 
