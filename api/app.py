@@ -2,6 +2,7 @@
 from flask import Flask;
 from flask_cors import CORS;
 from flask_migrate import Migrate;
+from flask_talisman import Talisman
 
 from config.database import database;
 from routes import register_routes;
@@ -50,6 +51,12 @@ class App:
             "version": "0.1"
         }
     })
+        
+        Talisman(
+        self.app,
+        content_security_policy=None,  # ou personalize conforme necessidade
+        force_https=False  # deixe como False se for rodar localmente ou com HTTP
+    )
         
         # Ativa o CORS permitindo requisições do frontend.
         CORS(self.app, origins='http://localhost:3000')
