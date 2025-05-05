@@ -18,4 +18,5 @@ port_dotenv = os.environ.get("PORT")
 if __name__ == "__main__":    
     print(f"API running in: http://127.0.0.1:{port_dotenv}")
     print("API Documentation running in: http://localhost:5000/apidocs")
-    serve(flask_app, host="0.0.0.0", port=port_dotenv)
+    # serve(flask_app, host="0.0.0.0", port=port_dotenv)
+    flask_app.run(ssl_context='adhoc', debug=True)
