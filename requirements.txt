@@ -25,3 +25,12 @@ Pytest
 
 Flasgger
 flasgger
+
+Flask-limiter
+flask-limiter 
+
+redis
+Redis
+
+flask-talisman
+Flask-talisman
