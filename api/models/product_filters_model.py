@@ -8,4 +8,4 @@ class ProductFilters(database.Model):
     created_at = database.Column(database.DateTime, default = datetime.now(timezone.utc), nullable = False)
     deleted_at = database.Column(database.DateTime, nullable = True)
 
-    product_id = database.Column(database.Integer, database.ForeignKey('product.id'), nullable = False);
+    product_id = database.Column(database.Integer, database.ForeignKey('products.id'), nullable = False);
