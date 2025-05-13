@@ -30,6 +30,7 @@ def register_routes(app):
     from .product.product_edit_route import product_edit_blueprint
     from .product.product_get_route import product_get_blueprint
     from .product.product_get_filter_route import product_get_filter_blueprint
+    from .product_filters.product_filter_create_route import product_filter_create_blueprint
 
 
     # slash
@@ -65,3 +66,4 @@ def register_routes(app):
     app.register_blueprint(product_edit_blueprint)
     app.register_blueprint(product_get_blueprint)
     app.register_blueprint(product_get_filter_blueprint)
+    app.register_blueprint(product_filter_create_blueprint)
