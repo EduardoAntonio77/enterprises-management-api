@@ -5,7 +5,7 @@ from .representative_model import Representative;
 from .enterprise_model import Enterprise;
 from .client_model import Client;
 from .product_model import Product;
-from .product_filters_model import Product_filters
+from .product_filters_model import ProductFilters
 
 # Representative → Enterprises
 Representative.enterprises = database.relationship(
@@ -28,9 +28,9 @@ Enterprise.products = database.relationship(
     lazy=True
 )
 
-# Product -> Product_filters
+# Product -> ProductFilters
 Product.product_filter = database.relationship(
-    'Product_filters',
+    'ProductFilters',
     backref='product',
     lazy=True
 )
