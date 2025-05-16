@@ -1,0 +1,55 @@
+tags:
+  - Product
+summary: Buscar produtos por múltiplos filtros
+description: >
+  Retorna todos os produtos que possuem **todos os filtros** informados na query string.  
+  O parâmetro `filters` é obrigatório e deve conter IDs numéricos separados por vírgula.  
+  A requisição requer autenticação JWT via header `Authorization: Bearer <token>`.
+
+parameters:
+  - name: filters
+    in: query
+    description: IDs dos filtros separados por vírgula (Ex "1,2,3")
+    required: true
+    schema:
+      type: string
+      example: "1,2,3"
+
+security:
+  - bearerAuth: []
+
+responses:
+  200:
+    description: Lista de produtos que correspondem aos filtros informados
+    content:
+      application/json:
+        example:
+          - id: 1
+            name: Produto X
+            price: 100.0
+            stock: 50
+            enterprise_id: 3
+            filters:
+              - Filtro A
+              - Filtro B
+
+  400:
+    description: Erro na validação do parâmetro `filters`
+    content:
+      application/json:
+        examples:
+          filtro-ausente:
+            summary: Parâmetro ausente
+            value:
+              error: 'The "filters" parameter is mandatory'
+          filtro-invalido:
+            summary: Filtros não são inteiros
+            value:
+              error: 'These filters must be integers'
+
+  401:
+    description: Token de autenticação JWT ausente ou inválido
+    content:
+      application/json:
+        example:
+          msg: "Missing Authorization Header"
