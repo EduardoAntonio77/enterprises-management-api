@@ -1,0 +1,42 @@
+      tags:
+        - Product Filter
+      summary: Deleta um filtro de produto
+      description: Endpoint protegido por JWT para deletar um filtro de produto existente pelo ID.
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: filter_id
+          required: true
+          schema:
+            type: integer
+          description: ID do filtro de produto a ser deletado
+      responses:
+        '200':
+          description: Filtro de produto deletado com sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: Product filter successfully deleted
+        '404':
+          description: Filtro de produto não encontrado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 404
+                  error:
+                    type: string
+                    example: Filter not found
+        '401':
+          description: Token JWT ausente ou inválido

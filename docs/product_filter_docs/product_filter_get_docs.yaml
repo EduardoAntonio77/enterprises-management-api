@@ -1,0 +1,31 @@
+      tags:
+        - Product Filter
+      summary: Lista todos os filtros de produto
+      description: Endpoint protegido por JWT que retorna todos os filtros de produtos cadastrados.
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Lista de filtros de produtos retornada com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    filter_id:
+                      type: integer
+                      example: 1
+                    filter_name:
+                      type: string
+                      example: "Cor"
+                    created_at:
+                      type: string
+                      format: date-time
+                      example: "2024-04-01T12:34:56"
+                    product_id:
+                      type: integer
+                      example: 10
+        '401':
+          description: Token JWT ausente ou inválido

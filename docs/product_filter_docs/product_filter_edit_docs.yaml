@@ -1,0 +1,69 @@
+      tags:
+        - Product Filter
+      summary: Edita um filtro de produto
+      description: Endpoint protegido por JWT para editar um filtro de produto existente pelo ID. Permite atualizar o nome do filtro e/ou o ID do produto associado.
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: filter_id
+          required: true
+          schema:
+            type: integer
+          description: ID do filtro de produto a ser editado
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filter_name:
+                  type: string
+                  example: "Cor"
+                product_id:
+                  type: integer
+                  example: 1
+              description: Dados a serem atualizados
+      responses:
+        '200':
+          description: Filtro de produto atualizado com sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: Filter updated successfully
+        '400':
+          description: Dados inválidos
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 400
+                  error:
+                    type: string
+                    example: Invalid data
+        '404':
+          description: Filtro ou produto não encontrado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 404
+                  error:
+                    type: string
+                    example: Filter not found
+        '401':
+          description: Token JWT ausente ou inválido
