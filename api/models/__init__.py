@@ -29,7 +29,7 @@ Enterprise.products = database.relationship(
 )
 
 # Product -> ProductFilters
-Product.product_filter = database.relationship(
+Product.filters = database.relationship(
     'ProductFilters',
     backref='product',
     lazy=True
