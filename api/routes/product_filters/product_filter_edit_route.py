@@ -1,15 +1,17 @@
 from flask import Blueprint, request, jsonify
+from flask_jwt_extended import jwt_required
+
 
 from middlewares.product_filters.product_filter_edit_middleware import product_filter_edit
-
 from controllers.product_filters.product_filter_edit_controller import product_filter_edit_controller
 
-from flask_jwt_extended import jwt_required
+from flasgger.utils import swag_from
 
 product_filter_edit_blueprint = Blueprint('product_filter_edit_blueprint', __name__)
 
 @product_filter_edit_blueprint.route("/product_filter/<int:filter_id>", methods=['PUT'])
 @jwt_required()
+@swag_from("../../../docs/product_filter_docs/product_filter_edit_docs.yaml")
 def edit_filter(filter_id):
     data = request.json
 
