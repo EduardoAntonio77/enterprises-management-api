@@ -4,10 +4,13 @@ from flask_jwt_extended import jwt_required
 from middlewares.product_filters.product_filter_delete_middleware import product_filter_delete_midlleware
 from controllers.product_filters.product_filter_delete_controller import product_filter_delete_controller
 
+from flasgger.utils import swag_from
+
 product_filter_delete_blueprint = Blueprint('delete_product_filter_blueprint', __name__)
 
 @product_filter_delete_blueprint.route("/product_filter/<int:filter_id>", methods=['DELETE'])
 @jwt_required()
+@swag_from("../../../docs/product_filter_docs/product_filter_delete_docs.yaml")
 def delete_product_filter(filter_id):
 
     error = product_filter_delete_midlleware(filter_id)
