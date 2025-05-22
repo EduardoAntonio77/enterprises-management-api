@@ -8,9 +8,11 @@ from flasgger.utils import swag_from
 
 get_products_by_filters_blueprint = Blueprint('get_products_by_filters', __name__)
 
-@get_products_by_filters_blueprint.route('/product/filters', methods=['GET'])
+@get_products_by_filters_blueprint.route('/product/filters/<string:filter_ids>/', methods=['GET'])
 @swag_from("../../../docs/product_docs/product_by_filter_get_docs.yaml")
 @get_products_by_filters_middleware
 @jwt_required()
-def handle_get_products_by_filters():
-    return get_products_by_filters_controller()
+def handle_get_products_by_filters(*args, **kwargs):
+    ids = kwargs.get('ids')
+    return get_products_by_filters_controller(ids)
+
