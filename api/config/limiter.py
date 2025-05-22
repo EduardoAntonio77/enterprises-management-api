@@ -4,7 +4,7 @@ from redis import Redis
 
 limiter = Limiter(
     key_func=get_remote_address,
-    default_limits=["10 per minute"]
+    default_limits=["100 per minute"]
 )
 
 def init_limiter(app):
