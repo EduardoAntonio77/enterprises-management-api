@@ -1,22 +1,77 @@
-tags:
-  - Client
-summary: "Endpoint para listar todos os clientes registrados."
-description: "Este endpoint permite recuperar uma lista de todos os clientes registrados no sistema."
-responses:
-  200:
-    description: "Lista de clientes retornada com sucesso!"
-    examples:
-      application/json:
-        status: 200
-        message: "Clients found"
-        data:
-          - id: 1
-            name: "Cliente 1"
-          - id: 2
-            name: "Cliente 2"
-  401:
-    description: "Token JWT inválido ou não fornecido."
-    examples:
-      application/json:
-        status: 401
-        message: "Token is missing or invalid"
+
+  tags:
+    - Client
+  summary: Buscar clientes com paginação
+  description: Retorna uma lista paginada de clientes.
+  parameters:
+    - name: page
+      in: query
+      type: integer
+      required: false
+      description: Número da página (padrão é 1)
+    - name: per_page
+      in: query
+      type: integer
+      required: false
+      description: Quantidade de itens por página (padrão é 3)
+    - name: Authorization
+      in: header
+      type: string
+      required: true
+      description: 'Token JWT. Exemplo: Bearer {seu_token}'
+  responses:
+    200:
+      description: Lista de clientes retornada com sucesso
+      schema:
+        type: object
+        properties:
+          page:
+            type: integer
+            example: 1
+            description: Página atual
+          per_page:
+            type: integer
+            example: 3
+            description: Quantidade de itens por página
+          total_pages:
+            type: integer
+            example: 5
+            description: Quantidade total de páginas
+          total_items:
+            type: integer
+            example: 15
+            description: Quantidade total de itens encontrados
+          data:
+            type: array
+            description: Lista de clientes
+            items:
+              type: object
+              properties:
+                client_id:
+                  type: integer
+                  example: 1
+                  description: ID do cliente
+                client_name:
+                  type: string
+                  example: 'João Silva'
+                  description: Nome do cliente
+                client_region:
+                  type: string
+                  example: 'São Paulo/SP'
+                  description: Região do cliente
+                client_phone:
+                  type: string
+                  example: '+55 11 91234-5678'
+                  description: Telefone do cliente
+                client_cpf:
+                  type: string
+                  example: '123.456.789-00'
+                  description: CPF do cliente
+                enterprise_id:
+                  type: integer
+                  example: 2
+                  description: ID da empresa vinculada
+    401:
+      description: Não autorizado - Token JWT ausente ou inválido
+    500:
+      description: Erro interno no servidor
