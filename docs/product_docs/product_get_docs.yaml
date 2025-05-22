@@ -1,25 +1,75 @@
 tags:
   - Product
-summary: "Endpoint para obter uma lista de todos os produtos."
-description: "Este endpoint permite obter todos os produtos registrados no sistema."
+
+summary: Retorna uma lista paginada de produtos ativos
+description: >
+  Endpoint para listar produtos que não foram deletados, com paginação.
+  Retorna dados básicos do produto junto com os filtros associados.
+
+parameters:
+  - name: page
+    in: query
+    type: integer
+    required: false
+    default: 1
+    description: Número da página da paginação
+  - name: per_page
+    in: query
+    type: integer
+    required: false
+    default: 3
+    description: Número de produtos por página
+
 responses:
   200:
-    description: "Lista de produtos retornada com sucesso."
-    examples:
-      application/json:
-        status: 200
+    description: Lista paginada de produtos
+    schema:
+      type: object
+      properties:
+        page:
+          type: integer
+          example: 1
+        per_page:
+          type: integer
+          example: 3
+        total_pages:
+          type: integer
+          example: 5
+        total_items:
+          type: integer
+          example: 15
         data:
-          - id: 1
-            name: "Produto A"
-            price: 99.99
-            description: "Descrição do Produto A"
-          - id: 2
-            name: "Produto B"
-            price: 150.75
-            description: "Descrição do Produto B"
-  401:
-    description: "Token de autenticação inválido ou ausente."
-    examples:
-      application/json:
-        status: 401
-        message: "Token de autenticação ausente ou inválido."
+          type: array
+          items:
+            type: object
+            properties:
+              product_id:
+                type: integer
+                example: 10
+              product_name:
+                type: string
+                example: "Camiseta Azul"
+              product_price:
+                type: number
+                format: float
+                example: 79.90
+              product_stock:
+                type: integer
+                example: 100
+              enterprise_id:
+                type: integer
+                example: 3
+              filters:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    filter_id:
+                      type: integer
+                      example: 1
+                    filter_name:
+                      type: string
+                      example: "Eletrodomésticos"
+
+security:
+  - Bearer: []

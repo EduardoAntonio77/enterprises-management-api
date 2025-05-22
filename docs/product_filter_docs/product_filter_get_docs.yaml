@@ -1,31 +1,57 @@
-      tags:
-        - Product Filter
-      summary: Lista todos os filtros de produto
-      description: Endpoint protegido por JWT que retorna todos os filtros de produtos cadastrados.
-      security:
-        - BearerAuth: []
-      responses:
-        '200':
-          description: Lista de filtros de produtos retornada com sucesso
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    filter_id:
-                      type: integer
-                      example: 1
-                    filter_name:
-                      type: string
-                      example: "Cor"
-                    created_at:
-                      type: string
-                      format: date-time
-                      example: "2024-04-01T12:34:56"
-                    product_id:
-                      type: integer
-                      example: 10
-        '401':
-          description: Token JWT ausente ou inválido
+tags:
+  - Product Filter
+
+summary: Retorna uma lista paginada de filtros de produtos
+description: >
+  Endpoint para listar filtros associados a produtos, com paginação.
+  Cada filtro inclui id, nome e o id do produto relacionado.
+
+parameters:
+  - name: page
+    in: query
+    type: integer
+    required: false
+    default: 1
+    description: Número da página da paginação
+  - name: per_page
+    in: query
+    type: integer
+    required: false
+    default: 10
+    description: Número de filtros por página
+
+responses:
+  200:
+    description: Lista paginada de filtros de produtos
+    schema:
+      type: object
+      properties:
+        page:
+          type: integer
+          example: 1
+        per_page:
+          type: integer
+          example: 10
+        total_pages:
+          type: integer
+          example: 3
+        total_items:
+          type: integer
+          example: 25
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              filter_id:
+                type: integer
+                example: 1
+              filter_name:
+                type: string
+                example: "Cor"
+              product_id:
+                type: integer
+                example: 5
+
+security:
+  - Bearer: []

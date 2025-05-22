@@ -1,23 +1,154 @@
-summary: Endpoint para buscar todos os representantes.
-tags:
-  - Representative
-description: Endpoint para buscar todos os representantes registrados.
-responses:
-  200:
-    description: Lista de representantes.
-    examples:
-      application/json:
-        - id: 1
-          name: João da Silva
-          email: joao.silva@email.com
-          phone: "+55 11 91234-5678"
-        - id: 2
-          name: Maria Oliveira
-          email: maria.oliveira@email.com
-          phone: "+55 11 98765-4321"
-  401:
-    description: Token de autenticação inválido ou ausente.
-    examples:
-      application/json:
-        status: 401
-        message: "Token de autenticação ausente ou inválido."
+
+  tags:
+    - Representative
+  summary: Buscar representantes com seus dados relacionados
+  description: Retorna uma lista paginada de representantes, incluindo suas empresas, clientes e produtos com filtros.
+  parameters:
+    - name: page
+      in: query
+      type: integer
+      required: false
+      description: Número da página (padrão é 1)
+    - name: per_page
+      in: query
+      type: integer
+      required: false
+      description: Quantidade de itens por página (padrão é 3)
+    - name: Authorization
+      in: header
+      type: string
+      required: true
+      description: 'Token JWT. Exemplo: Bearer {seu_token}'
+  responses:
+    200:
+      description: Lista de representantes retornada com sucesso
+      schema:
+        type: object
+        properties:
+          page:
+            type: integer
+            example: 1
+            description: Página atual
+          per_page:
+            type: integer
+            example: 3
+            description: Quantidade de itens por página
+          total_pages:
+            type: integer
+            example: 5
+            description: Total de páginas
+          total_items:
+            type: integer
+            example: 15
+            description: Total de itens encontrados
+          data:
+            type: array
+            description: Lista de representantes
+            items:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  example: 1
+                  description: ID do representante
+                name:
+                  type: string
+                  example: 'Carlos Silva'
+                  description: Nome do representante
+                cnpj:
+                  type: string
+                  example: '12.345.678/0001-99'
+                  description: CNPJ do representante
+                email:
+                  type: string
+                  example: 'carlos@email.com'
+                  description: Email do representante
+                enterprises:
+                  type: array
+                  description: Lista de empresas do representante
+                  items:
+                    type: object
+                    properties:
+                      enterprise_id:
+                        type: integer
+                        example: 10
+                        description: ID da empresa
+                      enterprise_name:
+                        type: string
+                        example: 'Empresa XPTO'
+                        description: Nome da empresa
+                      enterprise_address:
+                        type: string
+                        example: 'Av. Paulista, 1000'
+                        description: Endereço da empresa
+                      clients:
+                        type: array
+                        description: Lista de clientes da empresa
+                        items:
+                          type: object
+                          properties:
+                            client_id:
+                              type: integer
+                              example: 101
+                              description: ID do cliente
+                            client_name:
+                              type: string
+                              example: 'João da Silva'
+                              description: Nome do cliente
+                            client_region:
+                              type: string
+                              example: 'São Paulo/SP'
+                              description: Região do cliente
+                            client_phone:
+                              type: string
+                              example: '+55 11 91234-5678'
+                              description: Telefone do cliente
+                            client_cpf:
+                              type: string
+                              example: '123.456.789-00'
+                              description: CPF do cliente
+                      products:
+                        type: array
+                        description: Lista de produtos da empresa
+                        items:
+                          type: object
+                          properties:
+                            product_id:
+                              type: integer
+                              example: 501
+                              description: ID do produto
+                            product_name:
+                              type: string
+                              example: 'Produto ABC'
+                              description: Nome do produto
+                            product_price:
+                              type: number
+                              format: float
+                              example: 99.90
+                              description: Preço do produto
+                            product_stock:
+                              type: integer
+                              example: 50
+                              description: Quantidade em estoque
+                            enterprise_id:
+                              type: integer
+                              example: 10
+                              description: ID da empresa dona do produto
+                            filters:
+                              type: array
+                              description: Filtros aplicados ao produto
+                              items:
+                                type: object
+                                properties:
+                                  filter_id:
+                                    type: integer
+                                    example: 1
+                                    description: ID do filtro
+                                  filter_name:
+                                    type: string
+                                    example: 'Categoria X'
+                                    description: Nome do filtro
+    401:
+      description: Não autorizado - Token JWT ausente ou inválido
+    500:
+      description: Erro interno no servidor
