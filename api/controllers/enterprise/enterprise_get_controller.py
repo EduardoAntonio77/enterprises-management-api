@@ -1,44 +1,54 @@
 from models.enterprise_model import Enterprise
+from flask import request
+import json
 
 def get_enterprises():
-    enterprises = Enterprise.query.all()
+    page = request.args.get('page', 1, type=int)
+    per_page = request.args.get('per_page', 3, type=int)
 
-    all_enterprises_data = []
+    pagination = Enterprise.query.order_by(Enterprise.id).paginate(page=page,per_page=per_page,error_out=False)
 
-    for enterprise in enterprises:
-        client_data = {}
-        for i, client in enumerate(enterprise.clients, start=1):
-            client_data[str(i)] = {
-                'client_name': client.name,
-                'client_region': client.region,
-                'client_phone': client.phone,
-                'client_cpf': client.cpf
-            }
+    enterprises = pagination.items
 
-        products_data = {}
-        for i, product in enumerate(enterprise.products, start=1):
-            filters_data = {}
-            for f_i, f in enumerate(product.filters, start=1):
-                filters_data[str(f_i)] = {
-                    'filter_id': f.filter_id,
-                    'filter_name': f.filter_name
-                }
+    enterprise_data = [
+        {
+            'enterprise_id': e.id,
+            'enterprise_name': e.name,
+            'enterprise_address': e.address,
+            'clients': [
+                {
+                    'client_id': c.id,
+                    'client_name': c.name,
+                    'client_region': c.region,
+                    'client_phone': c.phone,
+                    'client_cpf': c.cpf
+                } for c in e.clients
+            ],
+            'products': [
+                {
+                    'product_id': p.id,
+                    'product_name': p.name,
+                    'product_price': p.price,
+                    'product_stock': p.stock,
+                    'filters': [
+                        {
+                            'filter_id': f.filter_id,
+                            'filter_name': f.filter_name
+                        } for f in sorted(p.filters, key=lambda f: f.filter_id)
+                    ]
+                } for p in sorted(e.products, key=lambda p: p.id)
+            ]
+        } for e in enterprises
+    ]
 
-            products_data[str(i)] = {
-                'product_name': product.name,
-                'product_price': product.price,
-                'product_stock': product.stock,
-                'filters': filters_data
-            }
+    result = {
+        'page': pagination.page,
+        'per_page': pagination.per_page,
+        'total_pages': pagination.pages,
+        'total_items': pagination.total,
+        'data': enterprise_data
+    }
 
-        enterprise_data = {
-            'enterprise_id': enterprise.id,
-            'enterprise_name': enterprise.name,
-            'enterprise_address': enterprise.address,
-            'clients': client_data,
-            'products': products_data
-        }
+    print(json.dumps(result, indent=4))
 
-        all_enterprises_data.append(enterprise_data)
-
-    return all_enterprises_data
+    return result
