@@ -1,14 +1,30 @@
 from models.product_filters_model import ProductFilters
+from flask import request
+import json
 
 def get_products_filter():
-    product_filter = ProductFilters.query.all()
-    return [
+    page = request.args.get('page', 1, type=int)
+    per_page = request.args.get('per_page', 10, type=int)
+
+    pagination = ProductFilters.query.order_by(ProductFilters.filter_id).paginate(page=page,per_page=per_page,error_out=False)
+
+    product_filters = pagination.items
+
+    product_data = [
         {
+            'filter_id': pf.filter_id,
+            'filter_name': pf.filter_name,
+            'product_id': pf.product_id
+        } for pf in product_filters
+    ]
 
-        'filter_id': filter.filter_id,
-        'filter_name': filter.filter_name,
-        'created_at': filter.created_at,
-        'product_id': filter.product_id
+    result = {
+        'page': pagination.page,
+        'per_page': pagination.per_page,
+        'total_pages': pagination.pages,
+        'total_items': pagination.total,
+        'data': product_data
+    }
 
-        } for filter in product_filter
-    ] 
+    print(json.dumps(result, indent=4))
+    return result
