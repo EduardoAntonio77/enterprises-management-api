@@ -1,21 +1,12 @@
-# controllers/product_controller.py
-from flask import request, jsonify
+from flask import jsonify
 from models.product_model import Product
 from models.product_filters_model import ProductFilters
 from config.database import database
 from sqlalchemy import func, case
 
-def get_products_by_filters_controller():
-
-    filters = request.args.get('filters')
-    if not filters:
-        return jsonify({'error': 'Parâmetro "filters" é obrigatório'}), 400
-
-    try:
-        ids = list(map(int, filters.split(',')))
-    except ValueError:
-        return jsonify({'error': 'Os filtros devem ser números inteiros'}), 400
-
+def get_products_by_filters_controller(ids):
+    if not ids or not isinstance(ids, list):
+        return jsonify({'error': 'O parâmetro "ids" é obrigatório e deve ser uma lista'}), 400
 
     query = (
         database.session.query(Product.id)
@@ -26,6 +17,12 @@ def get_products_by_filters_controller():
     )
 
     products = Product.query.filter(Product.id.in_(query)).all()
+
+    if not products:
+        return jsonify({
+            "status": 404,
+            "message": f"No products found with the following filters: {ids}"
+        }), 404
 
     return jsonify([
         {
