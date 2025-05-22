@@ -3,7 +3,6 @@ from flasgger import swag_from
 from flask_jwt_extended import jwt_required
 from controllers.enterprise.enterprise_get_controller import get_enterprises
 
-# Criando um blueprint para a rota
 enterprise_get_blueprint = Blueprint('enterprise_get_route', __name__)
 
 @enterprise_get_blueprint.route('/enterprise', methods=['GET'])
